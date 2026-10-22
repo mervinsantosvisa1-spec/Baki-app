@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121417">
+<meta name="description" content="Simple anterior and posterior workout tracker with 14 anterior and 10 posterior exercises. Choose a day, see your exercises, and tick them off safely.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="My Workout">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<link rel="icon" href="./icons/icon-192.png" type="image/png">
+<link rel="stylesheet" href="./app.css">
+<title>My Workout — Simple Edition</title>
+</head>
+<body>
+<div class="app-shell">
+ <header class="topbar">
+  <div class="brand"><img src="./icons/icon-192.png" width="45" height="45" alt="Baki-inspired app icon"><div><strong>My Workout</strong><span>Anterior / Posterior</span></div></div>
+  <button type="button" class="nav-tab settings-trigger" data-tab="settings" aria-label="Open workout settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg></button>
+ </header>
+ <main id="main-content">
+  <section id="week-screen" class="screen" aria-label="Workout planner">
+   <div class="heading-line"><div><span class="overline" id="today-label"></span><h1>Choose your day</h1></div><button type="button" id="jump-today" class="today-button">Today</button></div>
+   <div class="week-controls"><button type="button" id="prev-week" class="week-arrow" aria-label="Previous week">‹</button><span id="week-range"></span><button type="button" id="next-week" class="week-arrow" aria-label="Next week">›</button><button type="button" id="current-week" class="hidden">This week</button></div>
+   <div id="week-grid" class="week-grid" aria-label="Choose a day Monday to Sunday"></div>
+   <section class="workout-section" aria-labelledby="workout-title">
+    <div class="workout-head"><div><span class="day-tag" id="session-kicker">TODAY</span><h2 id="workout-title">Your workout</h2><p id="session-description"></p></div><div class="fraction"><strong id="day-percent">0%</strong><span>done</span></div></div>
+    <div id="session-tags" class="tags"></div>
+    <div class="bar-block"><div class="bar-track"><div class="bar-fill" id="day-bar"></div></div><div class="progress-caption"><span id="completion-label">0 completed</span><button type="button" class="reset-link" id="reset-day">Reset ticks</button></div></div>
+    <div class="list-heading"><h3 id="exercise-heading">Exercises</h3><span id="exercise-count-label"></span></div>
+    <p class="small-help">Tap either picture to see instructions and enlarged anatomical muscle targets. Tick only after confirming.</p>
+    <div id="exercise-list" class="exercise-list"></div><p id="session-note" class="session-note"></p>
+   </section>
+  </section>
+  <section id="history-screen" class="screen hidden" aria-label="Workout history"><div class="heading-line"><div><span class="overline">YOUR RECORD</span><h1>Workout history</h1></div></div><p class="page-help">See what you've completed on previous days.</p><div id="history-summary" class="history-summary"></div><div id="history-list" class="history-list"></div></section>
+  <section id="settings-screen" class="screen hidden" aria-label="Settings"><div class="heading-line"><div><span class="overline">MAKE IT YOURS</span><h1>My plan</h1></div><button type="button" class="nav-tab back-workout" data-tab="week">Done</button></div>
+   <div class="settings-panel">
+    <details class="settings-section"><summary>Edit my exercises <span>›</span></summary><div class="settings-content"><p>Choose a workout to edit. Your past workout history won't be deleted.</p><div class="segmented"><button type="button" id="edit-anterior" class="segment active">Anterior</button><button type="button" id="edit-posterior" class="segment">Posterior</button></div><div id="editor-list" class="editor-list"></div><button type="button" id="add-exercise" class="outline-action">+ Add exercise</button><button type="button" id="restore-defaults" class="text-action">Restore default exercises</button></div></details>
+    <details class="settings-section"><summary>Backup my workouts <span>›</span></summary><div class="settings-content"><p>Your ticks are saved on this device. Export a backup before changing phones or clearing browser data.</p><button type="button" id="export-data" class="outline-action">Download backup</button><label class="outline-action upload-label">Import backup<input type="file" id="import-data" accept=".json,application/json" hidden></label></div></details>
+    <details class="settings-section"><summary>How do I install it? <span>›</span></summary><div class="settings-content"><p>Once your app is published to GitHub Pages, open it in Safari, tap <strong>Share</strong>, then choose <strong>Add to Home Screen</strong>.</p><p>The check button always asks for confirmation so you won't accidentally tick exercises in your pocket.</p></div></details>
+   </div>
+  </section>
+  <!-- Kept for compatibility with previous saved app state; no separate progress screen in Simple Edition. -->
+  <section id="progress-screen" class="screen hidden" aria-label="Progress"><div id="progress-summary"></div><div id="progress-week-title"></div><div id="progress-week-dates"></div><div id="progress-days"></div><div id="progress-week-bar"></div><div id="progress-muscles"></div></section>
+ </main>
+ <nav class="bottom-nav" aria-label="Main navigation"><button type="button" class="nav-tab active" data-tab="week"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg><span>Workout</span></button><button type="button" class="nav-tab" data-tab="history"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/><path d="M12 7v6l4 2"/></svg><span>History</span></button></nav>
+</div>
+<dialog id="confirm-dialog" class="modal"><div class="modal-inner"><div class="modal-icon" id="confirm-icon">✓</div><h2 id="confirm-title">Completed?</h2><p id="confirm-description"></p><div class="modal-actions"><button type="button" id="confirm-cancel" class="modal-cancel">Cancel</button><button type="button" id="confirm-accept" class="modal-accept">Yes, done</button></div></div></dialog>
+<dialog id="detail-dialog" class="modal detail-modal"><div class="modal-inner"><div class="detail-top"><span class="overline">HOW TO DO IT</span><button type="button" class="close-x" id="detail-close" aria-label="Close">×</button></div><h2 id="detail-title"></h2><div id="detail-illustration" class="detail-illustration"></div><div class="detail-lower"><div id="detail-map" class="detail-map"></div><p id="detail-target"></p></div><div id="detail-tip" class="detail-tip"></div></div></dialog>
+<dialog id="edit-dialog" class="modal edit-modal"><form id="exercise-form" class="modal-inner"><h2 id="edit-dialog-title">Edit exercise</h2><label class="form-label">Exercise name<input id="edit-name" required maxlength="85"></label><div class="form-two"><label class="form-label">Sets<input type="number" min="1" max="8" id="edit-sets" required></label><label class="form-label">Reps<input id="edit-reps" maxlength="25" required></label></div><label class="form-label">Main muscle<select id="edit-muscle"></select></label><label class="form-label">Tip (optional)<textarea id="edit-tip" rows="3"></textarea></label><div class="modal-actions"><button type="button" id="edit-cancel" class="modal-cancel">Cancel</button><button type="submit" class="modal-accept">Save</button></div></form></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="./app.js" defer></script>
+</body></html>

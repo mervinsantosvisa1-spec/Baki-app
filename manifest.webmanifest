@@ -1,0 +1,30 @@
+{
+  "name": "My Workout \u2014 Simple Edition",
+  "short_name": "My Workout",
+  "description": "Simple workout tracker: 14 anterior and 10 posterior exercises, 3 \u00d7 10, detailed static muscle anatomy, confirmation checks and saved history.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101619",
+  "theme_color": "#101619",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
